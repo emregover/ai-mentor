@@ -1,0 +1,5 @@
+{
+  "name": "AI Sales Mentor",
+  "description": "An AI-powered sales mentor that analyzes past sales call recordings to provide constructive feedback on context, speech tonality, rapport, speed, and anxiety.",
+  "requestFramePermissions": []
+}
