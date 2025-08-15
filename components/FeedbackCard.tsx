@@ -1,11 +1,13 @@
-
 import React from 'react';
+import { VoiceIcon } from './icons/VoiceIcon';
 
 interface FeedbackCardProps {
   title: string;
   score: number;
   feedback: string;
   icon: React.ReactNode;
+  isSpeaking: boolean;
+  onToggleSpeech: () => void;
 }
 
 const ScoreCircle: React.FC<{ score: number }> = ({ score }) => {
@@ -47,7 +49,7 @@ const ScoreCircle: React.FC<{ score: number }> = ({ score }) => {
   );
 };
 
-const FeedbackCard: React.FC<FeedbackCardProps> = ({ title, score, feedback, icon }) => {
+const FeedbackCard: React.FC<FeedbackCardProps> = ({ title, score, feedback, icon, isSpeaking, onToggleSpeech }) => {
   return (
     <div className="bg-base-100 p-6 rounded-lg border border-base-300 flex flex-col h-full hover:border-brand-primary transition-colors duration-300">
       <div className="flex items-center justify-between mb-4">
@@ -57,8 +59,21 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({ title, score, feedback, ico
         </div>
         <ScoreCircle score={score} />
       </div>
-      <div>
+      <div className="flex-grow">
         <p className="text-sm text-gray-400 leading-relaxed">{feedback}</p>
+      </div>
+       <div className="mt-4 flex justify-end">
+        <button
+          onClick={onToggleSpeech}
+          className={`p-2 rounded-full transition-all duration-200 ${
+            isSpeaking 
+              ? 'bg-brand-primary/20 text-brand-primary animate-pulse' 
+              : 'bg-base-300/50 hover:bg-base-300 text-gray-400 hover:text-white'
+          }`}
+          aria-label={isSpeaking ? 'Stop reading feedback' : 'Read feedback aloud'}
+        >
+          <VoiceIcon className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );
